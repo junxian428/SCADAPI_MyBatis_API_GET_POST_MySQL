@@ -52,3 +52,6 @@ JSON data
 Return
 
 200
+
+![image](https://user-images.githubusercontent.com/58724748/228146717-53d89880-3d70-4248-9fee-dc9525613cd6.png)
+
