@@ -49,8 +49,19 @@ public class DeviceResource {
 
    @GetMapping("/getDataBased/{parameter}")
    public String getDataBasedStation(@PathVariable("parameter") String parameter){
-       System.out.println(parameter);
-       return "Received Parameter " + parameter;
+       //System.out.println(parameter);
+       try{
+        Devices device1 = new Devices();
+        device1 = deviceMapper.findLatestByStation(parameter);
+        // System.out.println(device1.getDatetime() + " " + device1.getDevice() + ":" + device1.getOutletpressure());
+        return "{\"station\": \"" + device1.getStation() + "\",\n\"DateTime\": \""+ device1.getDatetime() + "\",\n" + "\"device\" :" + device1.getDevice() + "\", \n \"status\": \""
+         + device1.getStatus() + "\", \"level\": \"" + device1.getLevel() + "\", \"inlet_pressure\":  \"" + device1.getInletpressure() + "\", \"outlet_pressure\" : \"" 
+         + device1.getOutletpressure() + "}";
+    }catch (Exception e) {
+        //System.out.println(e);
+        return "Error Caused by " + e;
+       }
+       //return "Received Parameter " + parameter;
    }
 
 
@@ -90,10 +101,12 @@ System.out.println(station + " " + device2 + " " + status +  " " + Integer.toStr
            try{
             deviceMapper.saveDeviceData(station, localDateTime, device2, level, level, inletpressure, outletpressure);
             System.out.println("saving");
+            return "Form submitted successfully! Your data is uploaded... Device: " + device2  ;
+
            }catch(Exception e){
                 System.out.println(e);
+                return "Your error code: " +e;
            }
-            return "Form submitted successfully!";
 
             
         }catch(Exception e){

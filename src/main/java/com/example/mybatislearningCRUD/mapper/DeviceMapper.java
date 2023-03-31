@@ -23,7 +23,7 @@ public interface DeviceMapper {
     @Insert("INSERT INTO devices (datetime, device, status, level, inletpressure, outletpressure) VALUES (#{datetime}, #{device}, #{status}, #{level}, #{inletpressure}, #{outletpressure})")
     void insertDevice(MultiValueMap<String, String> formData);
 
-    @Select("SELECT * FROM devices WHERE station = #{station} ORDER BY datetime DESC LIMIT 1")
+    @Select("SELECT * FROM devices WHERE station = #{station} ORDER BY id DESC LIMIT 1")
     Devices findLatestByStation(@Param("station") String station);
 
     //private Integer id;
